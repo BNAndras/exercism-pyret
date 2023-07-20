@@ -18,6 +18,8 @@
 # Example:
 # ./bin/test
 
+exit_code=0
+
 # Verify the Concept Exercises
 for concept_exercise_dir in ./exercises/concept/*/; do
     if [ -d $concept_exercise_dir ]; then
@@ -29,7 +31,21 @@ done
 # Verify the Practice Exercises
 for practice_exercise_dir in ./exercises/practice/*/; do
     if [ -d $practice_exercise_dir ]; then
-        echo "Checking $(basename "${practice_exercise_dir}") exercise..."
-        # TODO: run command to verify that the example solution passes the tests
+        test_dir_name=$(basename "${test_dir}")
+        test_dir_path=$(realpath "${test_dir}")
+        results_file_path="${test_dir_path}/results.json"
+        expected_results_file_path="${test_dir_path}/expected_results.json"
+        relative_test_dir="tests/${test_dir_name}/"
+
+        current_dir=$(pwd)
+        test-ci.sh "${test_dir_name}" "${relative_test_dir}" "${relative_test_dir}"
+        cd "${current_dir}"
+        
+        diff "${results_file_path}" "${expected_results_file_path}"
+        if [ $? -ne 0 ]; then
+            exit_code=1
+        fi
     fi
 done
+
+exit ${exit_code}
