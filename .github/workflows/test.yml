@@ -13,7 +13,7 @@
 # Requires scripts:
 # - bin/test
 
-name: <track> / Test
+name: Pyret / Test
 
 on:
   push:
@@ -23,17 +23,17 @@ on:
 
 jobs:
   ci:
-    runs-on: <image-name>
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Use <setup tooling>
-        uses: <action to setup tooling>
+      - name: Use Node.js
+        uses: actions/setup-node@e33196f7422957bea03ed53f6fbb155025ffc7b8
 
       - name: Install project dependencies
-        run: <install dependencies>
+        run: npm ci
 
       - name: Verify all exercises
-        run: bin/verify-exercises
+        run: bin/test
