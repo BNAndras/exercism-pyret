@@ -496,6 +496,14 @@
         "difficulty": 2
       },
       {
+        "slug": "yacht",
+        "name": "Yacht",
+        "uuid": "3b2e8d39-d399-4ec3-a14b-5a9a08ae840a",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "two-fer",
         "name": "Two Fer",
         "uuid": "198c1176-536a-49db-828b-0dc1655d7da9",
